@@ -1,67 +1,62 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <title>Investor Ledger</title>
 
-    <style>
-      html {
-        font-family: "helvetica neue", helvetica, arial, freesans, "liberation sans", "numbus sans l", sans-serif;
-      }
+<head>
+  <title>Investor Ledger</title>
 
-      h1 {
-        font-size: 2em;
-        font-weight: 300;
-        margin: 1em 0;
-        text-align: center;
-      }
+  <style>
+    html {
+      font-family: "helvetica neue", helvetica, arial, freesans, "liberation sans", "numbus sans l", sans-serif;
+    }
 
-      h1 > .small {
-        font-size: 0.5em;
-        font-weight: 300;
-        color: #999;
-      }
+    h1 {
+      font-size: 2em;
+      font-weight: 300;
+      margin: 1em 0;
+      text-align: center;
+    }
 
-      .content {
-        width: 800px;
-        margin: auto;
-      }
+    h1>.small {
+      font-size: 0.5em;
+      font-weight: 300;
+      color: #999;
+    }
 
-      table {
-        width: 100%;
-      }
-    </style>
-  </head>
+    .content {
+      width: 800px;
+      margin: auto;
+    }
 
-  <body>
-    <h1>
-      Your investing account ($0 available)
-      <div class="small">08/19/2014 - 10/15/2014</div>
-    </h1>
+    table {
+      width: 100%;
+    }
+  </style>
+</head>
 
-    <div class="content">
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Amount</th>
-            <th>Balance</th>
-          </tr>
-        </thead>
+<body>
+  <h1>
+    Your investing account ($0 available)
+    <div class="small">08/19/2014 - 10/15/2014</div>
+  </h1>
 
-        <tbody>
-          <!-- Table code goes here -->
-          <tr>
-            <th>Line item Date</th>
-            <th>Line item Type</th>
-            <th>Line item Description</th>
-            <th>Line item Amount</th>
-            <th>Line item Balance</th>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </body>
+  <div class="content">
+    <table id="transaction_table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+
+      <tbody id="transactions"></tbody>
+    </table>
+  </div>
+</body>
+
+<script src="assets/js/main.js"></script>
+
 </html>
