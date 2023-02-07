@@ -13,6 +13,42 @@ async function readJSONFile(file) {
 }
 
 /**
+ *
+ * @param {String} sentence 
+ * @returns {String} titleized sentence
+ */
+function titleize(sentence) {
+  return sentence.toLowerCase()
+    .split(' ')
+    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+    .join(' ');
+}
+
+/**
+ * Returns a displayable transaction description
+ * @param {Object} transaction 
+ * @returns {String} transaction description
+ */
+function getFormattedDescription(transaction) {
+  const destination = transaction.destination.id == 76510190788 ? 'You' : titleize(transaction.destination.description);
+  let source = 'You';
+  if (transaction.source.id !== 76510190788) {
+    source = transaction.source.description && titleize(transaction.source.description);
+    if (source === undefined) {
+      source = transaction.source.type && titleize(transaction.source.type + ' type account');
+    }
+  }
+
+  if (transaction.amount < 0) {
+    return `${titleize(transaction.type)} from ${source} to ${destination}`;
+  }
+
+  return `${titleize(transaction.type)} from ${source} 
+   ${transaction.requester ? ('for your ' + titleize(transaction.requester.type)) : ''}
+  `;
+}
+
+/**
  * renders provided transaction inside the table as a new row
  * @param {Array} transaction 
  */
@@ -22,7 +58,7 @@ function displayTransaction(transaction) {
     <tr class="transaction" data-activity-id="${transaction.activity_id}">
       <td class="transaction__date">${transaction.date}</td>
       <td class="transaction__type">${transaction.type}</td>
-      <td class="transaction__description">${'some description here'}</td>
+      <td class="transaction__description">${getFormattedDescription(transaction)}</td>
       <td class="transaction__amount">${transaction.amount}</td>
       <td class="transaction__balance">${transaction.balance}</td>
     </tr>
