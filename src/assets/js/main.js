@@ -3,28 +3,6 @@
 const LEDGERS = ['simple', 'duplicate', 'complicated'];
 
 /**
- * reads the json file on the provided path and returns it as JS object
- * @param {String} file 
- * @returns {Object} a JS object representing the read json
- */
-async function readJSONFile(file) {
-  const response = await fetch(file);
-  return await response.json();
-}
-
-/**
- *
- * @param {String} sentence 
- * @returns {String} titleized sentence
- */
-function titleize(sentence) {
-  return sentence.toLowerCase()
-    .split(' ')
-    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
-    .join(' ');
-}
-
-/**
  * Returns a displayable transaction description
  * @param {Object} transaction 
  * @returns {String} transaction description
@@ -54,15 +32,26 @@ function getFormattedDescription(transaction) {
  */
 function displayTransaction(transaction) {
   const txnsContainer = document.getElementById('transactions');
+  const negativeAmountModifier = transaction.amount < 0 ? 'transaction__row--negative-txn' : '';
+  const negativeBalanceModifier = transaction.balance < 0 ? 'transaction__row--negative-txn' : '';
+
   txnsContainer.innerHTML += (`
     <tr class="transaction" data-activity-id="${transaction.activity_id}">
-      <td class="transaction__date">${transaction.date}</td>
-      <td class="transaction__type">${transaction.type}</td>
-      <td class="transaction__description">${getFormattedDescription(transaction)}</td>
-      <td class="transaction__amount">${transaction.amount}</td>
-      <td class="transaction__balance">${transaction.balance}</td>
+      <td class="transaction__row">${getFormattedDate(new Date(transaction.date))}</td>
+      <td class="transaction__row transaction__row--type">${titleize(transaction.type)}</td>
+      <td class="transaction__row">${getFormattedDescription(transaction)}</td>
+      <td class="transaction__row ${negativeAmountModifier}">${getFormattedCurrency(transaction.amount)}</td>
+      <td class="transaction__row ${negativeBalanceModifier}">${getFormattedCurrency(transaction.balance)}</td>
     </tr>
   `);
+}
+
+/**
+ * Shows formatted balance in the balance section on screen
+ * @param {Number} balance -- The amount to display 
+ */
+function displayBalance(balance) {
+  document.getElementById('balance').innerText = getFormattedCurrency(balance);
 }
 
 /**
@@ -114,10 +103,13 @@ function reorderSameTimestampTxns(transactions) {
   }
 }
 
-readJSONFile(`data/${LEDGERS[2]}_ledger.json`).then((data) => {
-  const uniqueTransactions = getUniqueTransactions(data);
+window.onload = () => {
+  readJSONFile(`data/${LEDGERS[2]}_ledger.json`).then((data) => {
+    const uniqueTransactions = getUniqueTransactions(data);
 
-  uniqueTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
-  reorderSameTimestampTxns(uniqueTransactions);
-  uniqueTransactions.forEach(displayTransaction);
-});
+    uniqueTransactions.sort((a, b) => new Date(a.date) - new Date(b.date));
+    reorderSameTimestampTxns(uniqueTransactions);
+    uniqueTransactions.forEach(displayTransaction);
+    displayBalance(uniqueTransactions[uniqueTransactions.length - 1].balance);
+  });
+};

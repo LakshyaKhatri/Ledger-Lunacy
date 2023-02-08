@@ -4,60 +4,49 @@
 
 <head>
   <title>Investor Ledger</title>
-
-  <style>
-    html {
-      font-family: "helvetica neue", helvetica, arial, freesans, "liberation sans", "numbus sans l", sans-serif;
-    }
-
-    h1 {
-      font-size: 2em;
-      font-weight: 300;
-      margin: 1em 0;
-      text-align: center;
-    }
-
-    h1>.small {
-      font-size: 0.5em;
-      font-weight: 300;
-      color: #999;
-    }
-
-    .content {
-      width: 800px;
-      margin: auto;
-    }
-
-    table {
-      width: 100%;
-    }
-
-  </style>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.cdnfonts.com/css/helvetica-neue-9" rel="stylesheet">
 </head>
 
 <body>
-  <h1>
-    Your investing account ($0 available)
-    <div class="small">08/19/2014 - 10/15/2014</div>
-  </h1>
-
-  <div class="content">
-    <table id="transaction_table">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Type</th>
-          <th>Description</th>
-          <th>Amount</th>
-          <th>Balance</th>
-        </tr>
-      </thead>
-
-      <tbody id="transactions"></tbody>
-    </table>
+  <div class="heading">
+    <h1 class="heading__text">
+      Investing account
+      <!-- <div class="small"></div> -->
+    </h1>
   </div>
-</body>
 
-<script src="assets/js/main.js"></script>
+  <section class="balance_info_container">
+    <div class="balance_info">
+      <h1 class="balance_info__amount" id="balance">$0</h1>
+      <p class="balance_info__label">balance</p>
+    </div>
+  </section>
+
+  <section class="transactions_container">
+    <div class="transactions_info">
+      <h2 class="transactions_info__label">Past Transactions</h2>
+
+      <div class="transactions_table_container">
+        <table class="transactions_table" id="transactions_table">
+          <thead>
+            <tr>
+              <th class="transactions_table__heading">Date</th>
+              <th class="transactions_table__heading">Transaction</th>
+              <th class="transactions_table__heading">Description</th>
+              <th class="transactions_table__heading">Amount</th>
+              <th class="transactions_table__heading">Balance</th>
+            </tr>
+          </thead>
+
+          <tbody id="transactions"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <script src="assets/js/utils.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
 
 </html>
