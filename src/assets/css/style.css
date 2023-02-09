@@ -70,7 +70,7 @@ html {
 }
 
 .transactions_table_container {
-  overflow-x: scroll;
+  overflow-x: auto;
   height: 100%;
 }
 
