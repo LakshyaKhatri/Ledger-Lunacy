@@ -70,7 +70,8 @@ html {
 }
 
 .transactions_table_container {
-  overflow-y: scroll;
+  overflow-x: scroll;
+  height: 100%;
 }
 
 .transactions_table {
@@ -89,7 +90,7 @@ html {
   color: #888888;
 }
 
-.transaction__row {
+.transaction__data {
   border-bottom: 1px solid #e2e4e5;
   padding: 25px 0;
   font-size: 0.9em;
@@ -97,10 +98,10 @@ html {
   color: #666666;
 }
 
-.transaction__row--type {
+.transaction__data--type {
   font-weight: bold;
 }
 
-.transaction__row--negative-txn {
+.transaction__data--negative-txn {
   font-weight: bold;
 }
