@@ -33,7 +33,6 @@ function getFormattedDescription(transaction) {
 function displayTransaction(transaction) {
   const txnsContainer = document.getElementById('transactions');
   const negativeAmountModifier = transaction.amount < 0 ? 'transaction__data--negative-txn' : '';
-  const negativeBalanceModifier = transaction.balance < 0 ? 'transaction__data--negative-txn' : '';
 
   txnsContainer.innerHTML += (`
     <tr class="transaction" data-activity-id="${transaction.activity_id}">
@@ -41,7 +40,7 @@ function displayTransaction(transaction) {
       <td class="transaction__data transaction__data--type">${titleize(transaction.type)}</td>
       <td class="transaction__data">${getFormattedDescription(transaction)}</td>
       <td class="transaction__data ${negativeAmountModifier}">${getFormattedCurrency(transaction.amount)}</td>
-      <td class="transaction__data ${negativeBalanceModifier}">${getFormattedCurrency(transaction.balance)}</td>
+      <td class="transaction__data">${getFormattedCurrency(transaction.balance)}</td>
     </tr>
   `);
 }
