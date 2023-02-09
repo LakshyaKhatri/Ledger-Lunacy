@@ -14,6 +14,6 @@ We have also taken steps to ensure that this issue does not occur again in the f
 
 We understand that your trust in us has been shaken, and we would like to do everything in our power to regain it. If there is anything else that we can do to help, please don't hesitate to reach out.
 
-Sincerely,
-Lakshya Khatri
+Sincerely,  
+Lakshya Khatri  
 Customer Support Team
